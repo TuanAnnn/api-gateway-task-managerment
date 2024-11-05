@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package user_query;
+
+option go_package = "./";
+
+service UserQueryService {
+  rpc FindAccount(FindUserRequest) returns (FindUserResponse) {}
+  rpc FindAllAccounts(FindAllUsersRequest)
+      returns (FindAllUsersResponse) {}
+}
+
+message User {
+  string id = 1;
+  string userName = 2;
+  string email = 3;
+  bool isActive = 4;
+}
+
+message FindAllUsersResponseData {
+  repeated User users = 3;
+  int32 total = 4;
+  int32 count = 5;
+  int32 page = 6;
+}
+
+// FindAllAccounts
+
+message FindAllUsersRequest { int32 page = 1; }
+
+message FindAllUsersResponse {
+  int32 status = 1;
+  repeated string error = 2;
+  FindAllUsersResponseData data = 3;
+}
+
+// FindAccount
+
+message FindUserRequest { string id = 1; }
+
+message FindUserResponse {
+  int32 status = 1;
+  repeated string error = 2;
+  User data = 3;
+}

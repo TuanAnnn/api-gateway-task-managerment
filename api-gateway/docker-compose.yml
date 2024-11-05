@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  task_management_api_gatway:
+    container_name: task_management_api_gatway
+    build:
+      context: .
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - IS_DOCKER=true
+
+networks:
+  default:
+    external:
+      name: api_gateway_network
